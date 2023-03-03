@@ -30,11 +30,11 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge-1e010.kxcdn.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge-1e010.kxcdn.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge-1e010.kxcdn.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -59,7 +59,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge-1e010.kxcdn.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
 
 @app.route('/getstream',methods=['GET'])
