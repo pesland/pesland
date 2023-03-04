@@ -14,8 +14,6 @@ def index(m3u8):
     source = source.replace('%3F', '?')
     source = source.replace("m3u8?","")
     videoid = request.args.get("videoid")
-    source = source+'\n'+videoid
-    return source
     '''source = source.replace(videoid+'.m3u8',videoid)'''
     headers = {
         "accept": "*/*",
@@ -33,6 +31,7 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
+    return tsal
     tsal = tsal.replace(videoid+'_','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
         tsal = tsal.replace('internal','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
