@@ -105,8 +105,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge1')
             if "m3u8" in veri:
-                '''return "https://urchin-app-dmm7g.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://urchin-app-dmm7g.ondigitalocean.app/"+veri+'&videoid='+videoid
+                '''return "https://volestream-1e010.kxcdn.com/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://volestream-1e010.kxcdn.com/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
  
