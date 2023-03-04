@@ -12,9 +12,10 @@ def index(m3u8):
     source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
-    source = source.replace("m3u8?","")
+    source = source.replace("/m3u8?","")
     videoid = request.args.get("videoid")
     '''source = source.replace(videoid+'.m3u8',videoid)'''
+    return source
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
