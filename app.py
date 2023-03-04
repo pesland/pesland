@@ -7,11 +7,10 @@ app = Flask(__name__)
 CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
-    m3u8 = request.url.replace('__','/')
+ 
     source = m3u8
     source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/', '')
-    source = source.replace('%2F', '/')
-    source = source.replace('%3F', '?')
+   
     videoid = request.args.get("videoid")
     '''source = source.replace(videoid+'.m3u8',videoid)'''
     headers = {
@@ -41,8 +40,7 @@ def index(m3u8):
 def getm3u8():
     source = request.url
     source = source.replace('https://volestream-1e010.kxcdn.com/getm3u8?source=', '')
-    source = source.replace('%2F', '/')
-    source = source.replace('%3F', '?')
+
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
@@ -68,8 +66,7 @@ def getstream():
     if param == "getts":
         source = request.url
         source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=','')
-        source = source.replace('%2F','/')
-        source = source.replace('%3F','?')
+     
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
@@ -93,7 +90,7 @@ def getstream():
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
-            veri = veri[0].replace("\/", "__")
+         
             veri = veri.replace('edge3','edge10')
             veri = veri.replace('edge100','edge10')
             veri = veri.replace('edge4','edge10')
