@@ -14,7 +14,6 @@ def index(m3u8):
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
     '''source = source.replace(videoid+'.m3u8',videoid)'''
-    return source
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
