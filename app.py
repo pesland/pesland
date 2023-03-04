@@ -9,6 +9,7 @@ CORS(app)
 def index(m3u8):
     m3u8 = request.url.replace('__','/')
     source = m3u8
+    return source
     source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
