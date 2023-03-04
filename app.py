@@ -7,10 +7,11 @@ app = Flask(__name__)
 CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
- 
+    m3u8 = request.url.replace('__','/')
     source = m3u8
     source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/', '')
-   
+    source = source.replace('%2F', '/')
+    source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
     '''source = source.replace(videoid+'.m3u8',videoid)'''
     headers = {
@@ -29,18 +30,19 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://kkk-1e010.kxcdn.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://kkk-1e010.kxcdn.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://kkk-1e010.kxcdn.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
-
+ 
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
     source = request.url
     source = source.replace('https://volestream-1e010.kxcdn.com/getm3u8?source=', '')
-
+    source = source.replace('%2F', '/')
+    source = source.replace('%3F', '?')
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
@@ -57,16 +59,17 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://kkk-1e010.kxcdn.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://volestream-1e010.kxcdn.com/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
-
+ 
 @app.route('/getstream',methods=['GET'])
 def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
         source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=','')
-     
+        source = source.replace('%2F','/')
+        source = source.replace('%3F','?')
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
@@ -90,7 +93,7 @@ def getstream():
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
-         
+            veri = veri[0].replace("\/", "__")
             veri = veri.replace('edge3','edge10')
             veri = veri.replace('edge100','edge10')
             veri = veri.replace('edge4','edge10')
@@ -106,6 +109,6 @@ def getstream():
                 return "https://urchin-app-dmm7g.ondigitalocean.app/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
-
+ 
 if __name__ == '__main__':
     app.run()
