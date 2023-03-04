@@ -99,7 +99,7 @@ def getstream():
             veri = veri.replace('edge4','edge10')
             veri = veri.replace('edge2','edge10')
             veri = veri.replace('edge5','edge10')
-            veri = veri.replace('edge1','edge10')
+            
             veri = veri.replace('edge6', 'edge10')
             veri = veri.replace('edge7', 'edge10')
             veri = veri.replace(':43434','')
