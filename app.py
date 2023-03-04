@@ -9,7 +9,7 @@ CORS(app)
 def index(m3u8):
     m3u8 = request.url.replace('__','/')
     source = m3u8
-    source = source.replace('https://volestream-1e010.kxcdn.com/', '')
+    source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -67,7 +67,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://volestream-1e010.kxcdn.com/getstream?param=getts&source=','')
+        source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
@@ -105,8 +105,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://volestream-1e010.kxcdn.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://volestream-1e010.kxcdn.com/"+veri+'&videoid='+videoid
+                '''return "https://urchin-app-dmm7g.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://urchin-app-dmm7g.ondigitalocean.app/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
 
