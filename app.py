@@ -12,8 +12,8 @@ def index(m3u8):
     source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
-    videoid = request.args.get("videoid").replace('.m3u8','')
-    source = source.replace(videoid+'.m3u8',videoid)
+    videoid = request.args.get("videoid")
+    '''source = source.replace(videoid+'.m3u8',videoid)'''
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
@@ -31,6 +31,10 @@ def index(m3u8):
     ts = requests.get(source, headers=headers)
     tsal = ts.text
     tsal = tsal.replace(videoid+'_','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    if "internal" in tsal:
+        tsal = tsal.replace('internal','https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+    if "segment" in tsal:
+        tsal = tsal.replace('\n'+'media','\n'+'https://urchin-app-dmm7g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -85,7 +89,7 @@ def getstream():
     if param == "getm3u8":
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
-        r = requests.post("https://1xlite-566140.top/cinema",json=veriler)
+        r = requests.post("https://lite-1x202983.top/cinema",json=veriler)
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
@@ -99,6 +103,7 @@ def getstream():
             veri = veri.replace('edge6', 'edge10')
             veri = veri.replace('edge7', 'edge10')
             veri = veri.replace(':43434','')
+            veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
                 '''return "https://urchin-app-dmm7g.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
                 return "https://urchin-app-dmm7g.ondigitalocean.app/"+veri+'&videoid='+videoid
