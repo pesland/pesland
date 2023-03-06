@@ -40,7 +40,7 @@ def index(m3u8):
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
     source = request.url
-    source = source.replace('https://izstream.herokuapp.com/getm3u8?source=', '')
+    source = source.replace('https://urchin-app-dmm7g.ondigitalocean.app/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     headers = {
@@ -89,7 +89,7 @@ def getstream():
     if param == "getm3u8":
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
-        r = requests.post("https://lite-1x202983.top/cinema",json=veriler)
+        r = requests.post("https://1xlite-231279.top/cinema",json=veriler)
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
