@@ -34,7 +34,7 @@ def index(m3u8):
     if "internal" in tsal:
         tsal = tsal.replace('internal','https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -67,7 +67,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=','')
+        source = source.replace('','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
