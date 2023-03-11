@@ -67,7 +67,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('','')
+        source = source.replace('https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
