@@ -30,9 +30,9 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
         tsal = tsal.replace('\n'+'media','\n'+'https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
