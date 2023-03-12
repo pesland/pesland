@@ -30,11 +30,11 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge11.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge12.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge13.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -59,7 +59,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://king-prawn-app-mx7i9.ondigitalocean.app/getstream?param=getts&source=https://edge14.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
 
 @app.route('/getstream',methods=['GET'])
