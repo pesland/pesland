@@ -40,7 +40,7 @@ def index(m3u8):
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
     source = request.url
-    source = source.replace('https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source=', '')
+    source = source.replace('', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     headers = {
