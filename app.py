@@ -94,11 +94,7 @@ def getstream():
             veri = veri[0].replace("\/", "__")
             veri = veri.replace(':43434','')
             veri = veri.replace('edge3','edge10')
-            if "m3u8" in veri:
-                '''return ""+veri+'&videoid='+videoid'''
-                return "https://king-prawn-app-mx7i9.ondigitalocean.app/"+veri+'&videoid='+videoid
-        else:
-            return "Veri yok"
+            
 
 if __name__ == '__main__':
     app.run()
