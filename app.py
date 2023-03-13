@@ -3,13 +3,11 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS
 import re
-app = Flask(__name__)
+
 CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
-    m3u8 = request.url.replace('__','/')
     source = m3u8
-    source = source.replace('https://king-prawn-app-mx7i9.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
