@@ -55,10 +55,7 @@ def getm3u8():
         'sec-fetch-site': 'cross-site',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
-    ts = requests.get(source, headers=headers)
-    tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
-    return tsal
+ 
 
 @app.route('/getstream',methods=['GET'])
 def getstream():
