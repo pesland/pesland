@@ -95,7 +95,7 @@ def getstream():
             veri = re.findall('"URL":"(.*?)"',veri)
             veri = veri[0].replace("\/", "__")
             veri = veri.replace(':43434','')
-            veri = veri.replace('edge100','edge10')
+            veri = veri.replace('edge3','edge10')
             if "m3u8" in veri:
                 '''return "https://king-prawn-app-mx7i9.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
                 return "https://king-prawn-app-mx7i9.ondigitalocean.app/"+veri+'&videoid='+videoid
