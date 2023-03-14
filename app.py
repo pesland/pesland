@@ -104,11 +104,7 @@ def getstream():
             veri = veri.replace('edge7', 'edge10')
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
-            if "m3u8" in veri:
-                '''return "https://monkfish-app-qpbmn.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://monkfish-app-qpbmn.ondigitalocean.app/"+veri+'&videoid='+videoid
-        else:
-            return "Veri yok"
+          
 
 if __name__ == '__main__':
     app.run()
