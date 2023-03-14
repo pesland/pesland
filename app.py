@@ -18,8 +18,8 @@ def index(m3u8):
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
         "accept-language": "tr-TR, tr;q = 0.9",
-        "origin": "",
-        "referer": "",
+        "origin": "https://www.maltinok.com",
+        "referer": "https://www.maltinok.com/",
         'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
@@ -30,11 +30,11 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge7.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge7.xmediaget.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge7.xmediaget.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -59,7 +59,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge7.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
 
 @app.route('/getstream',methods=['GET'])
@@ -67,15 +67,15 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        
+        source = source.replace('https://monkfish-app-qpbmn.ondigitalocean.app/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
             'accept-language': 'tr-TR,tr;q=0.9',
-            'origin': '',
-            'referer': '',
+            'origin': 'https://www.maltinok.com',
+            'referer': 'https://www.maltinok.com/',
             'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -94,16 +94,16 @@ def getstream():
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
             veri = veri[0].replace("\/", "__")
-            veri = veri.replace('edge3','edge7')
-            veri = veri.replace('edge100','edge7')
-            veri = veri.replace('edge4','edge7')
-            veri = veri.replace('edge2','edge7')
-            veri = veri.replace('edge5','edge7')
-            veri = veri.replace('edge1','edge7')
-            veri = veri.replace('edge6', 'edge7')
-            veri = veri.replace('edge7', 'edge7')
+            veri = veri.replace('edge3','edge10')
+            veri = veri.replace('edge100','edge10')
+            veri = veri.replace('edge4','edge10')
+            veri = veri.replace('edge2','edge10')
+            veri = veri.replace('edge5','edge10')
+            veri = veri.replace('edge1','edge10')
+            veri = veri.replace('edge6', 'edge10')
+            veri = veri.replace('edge7', 'edge10')
             veri = veri.replace(':43434','')
-            veri = veri.replace('edge100','edge7')
+            veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
                 '''return "https://monkfish-app-qpbmn.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
                 return "https://monkfish-app-qpbmn.ondigitalocean.app/"+veri+'&videoid='+videoid
