@@ -40,7 +40,7 @@ def index(m3u8):
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
     source = request.url
-    source = source.replace('https://volestream.herokuapp.com/getm3u8?source=', '')
+    source = source.replace('https://lucky-bush-37ad.telifatmaoc.workers.dev/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     headers = {
@@ -59,7 +59,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://lucky-bush-37ad.telifatmaoc.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
 
 @app.route('/getstream',methods=['GET'])
@@ -67,7 +67,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://volestream.herokuapp.com/getstream?param=getts&source=','')
+        source = source.replace('https://lucky-bush-37ad.telifatmaoc.workers.dev/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
