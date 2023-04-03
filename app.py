@@ -67,7 +67,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://volestream.herokuapp.com/getstream?param=getts&source=','')
+        source = source.replace('https://lucky-bush-37ad.telifatmaoc.workers.dev/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
@@ -105,8 +105,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://volestream.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://volestream.herokuapp.com/"+veri+'&videoid='+videoid
+                '''return "https://lucky-bush-37ad.telifatmaoc.workers.dev/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://lucky-bush-37ad.telifatmaoc.workers.dev/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
 
