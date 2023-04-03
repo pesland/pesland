@@ -106,7 +106,7 @@ def getstream():
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
                 '''return "https://volestream.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://lucky-bush-37ad.telifatmaoc.workers.dev/"+veri+'&videoid='+videoid
+                return "https://volestream.herokuapp.com/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
 
