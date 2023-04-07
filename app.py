@@ -33,7 +33,7 @@ if 'internal' in tsal:
     tsal = tsal.replace('internal', f'https://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
 if 'segment' in tsal:
     tsal = tsal.replace('\nmedia', f'\nhttps://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
-tsal = tsal.replace('https://onebet.volestream01.workers.dev/', '')
+tsal = tsal.replace('https://volestream.herokuapp.com/', '')
 return tsal
 
 
