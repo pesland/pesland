@@ -9,7 +9,7 @@ CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-   
+    source = m3u8.replace('https://volestream.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get('videoid')
@@ -27,15 +27,13 @@ def index(m3u8):
         'sec-fetch-site': 'cross-site',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
-   ts = requests.get(m3u8, headers=headers)
-tsal = ts.text.replace(videoid+'_', f'https://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
-if 'internal' in tsal:
-    tsal = tsal.replace('internal', f'https://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
-if 'segment' in tsal:
-    tsal = tsal.replace('\nmedia', f'\nhttps://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
-tsal = tsal.replace('https://volestream.herokuapp.com/', '')
-return tsal
-
+    ts = requests.get(source, headers=headers)
+    tsal = ts.text.replace(videoid+'_', f'https://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
+    if 'internal' in tsal:
+        tsal = tsal.replace('internal', f'https://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
+    if 'segment' in tsal:
+        tsal = tsal.replace('\nmedia', f'\nhttps://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+    return tsal
 
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
@@ -58,7 +56,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://onebet.volestream01.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
  
 @app.route('/getstream',methods=['GET'])
@@ -104,8 +102,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://volestream.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://volestream.herokuapp.com/"+veri+'&videoid='+videoid
+                '''return "https://onebet.volestream01.workers.dev/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://onebet.volestream01.workers.dev/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
  
