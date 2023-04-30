@@ -102,7 +102,7 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://volestream.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
+                '''return "https://pingstream.herokuapp.com/https://volestream.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
                 return "https://pingstream.herokuapp.com/https://volestream.herokuapp.com/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
