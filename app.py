@@ -1,9 +1,7 @@
-import requests
-from flask import Flask, request
-from flask_cors import CORS
-import re
 import asyncio
 import aiohttp
+from flask import Flask, request
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -11,7 +9,8 @@ CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__','/')
-    source = m3u8.replace('https://volestream.herokuapp.com/', '')
+    source = m3u8
+    source = source.replace('https://volestream.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -45,9 +44,10 @@ def index(m3u8):
                 tsal = tsal.replace('\n'+'media','\n'+'https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
             tsal = tsal.replace('\n','')
             tsal = tsal.replace(' ','')
-        return tsal
+            return tsal
 
     tsal = asyncio.run(main())
+
     return tsal
 
 
