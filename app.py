@@ -28,12 +28,13 @@ def index(m3u8):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     ts = requests.get(source, headers=headers)
-    tsal = ts.text.replace(videoid+'_', f'https://cdn.esraerol.workers.dev/https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
-    if 'internal' in tsal:
-        tsal = tsal.replace('internal', f'https://cdn.esraerol.workers.dev/https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
-    if 'segment' in tsal:
-        tsal = tsal.replace('\nmedia', f'\nhttps://cdn.esraerol.workers.dev/https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
-    return tsal
+   tsal = ts.text.replace(videoid+'_', f'https://cdn.esraerol.workers.dev/https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
+if 'internal' in tsal:
+    tsal = tsal.replace('internal', f'https://cdn.esraerol.workers.dev/https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
+if 'segment' in tsal:
+    tsal = tsal.replace('\nmedia', f'\nhttps://cdn.esraerol.workers.dev/https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+return tsal
+
 
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
