@@ -15,7 +15,13 @@ def index(m3u8):
     videoid = request.args.get('videoid')
     headers = {
         'accept': '*/*',
-https://pingstream.herokuapp.com/
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'tr-TR, tr;q=0.9',
+        'origin': 'https://www.maltinok.com',
+        'referer': 'https://www.maltinok.com/',
+        'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
         'sec-fetch-dest': 'empty',
         'sec-fetch-mode': 'cors',
         'sec-fetch-site': 'cross-site',
