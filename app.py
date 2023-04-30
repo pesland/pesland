@@ -9,7 +9,7 @@ CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('https://plankton-app-ljeqg.ondigitalocean.app/', '')
+    source = m3u8.replace('https://cdn.esraerol.workers.dev/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get('videoid')
@@ -56,7 +56,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://cdn.esraerol.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
  
 @app.route('/getstream',methods=['GET'])
@@ -64,7 +64,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://plankton-app-ljeqg.ondigitalocean.app/getstream?param=getts&source=','')
+        source = source.replace('https://cdn.esraerol.workers.dev/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
@@ -102,8 +102,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://plankton-app-ljeqg.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://plankton-app-ljeqg.ondigitalocean.app/"+veri+'&videoid='+videoid
+                '''return "https://cdn.esraerol.workers.dev/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://cdn.esraerol.workers.dev/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
  
