@@ -1,21 +1,21 @@
 import requests
-from flask import Flask
-from flask import request
+from flask import Flask, request
 from flask_cors import CORS
 import re
 import asyncio
 import aiohttp
+
 app = Flask(__name__)
 CORS(app)
+
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__','/')
-    source = m3u8
-    source = source.replace('https://volestream.herokuapp.com/', '')
+    source = m3u8.replace('https://volestream.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
-    '''source = source.replace(videoid+'.m3u8',videoid)'''
+
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
@@ -31,23 +31,25 @@ def index(m3u8):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
 
-async def fetch(session, url):
-    async with session.get(url) as response:
-        return await response.text()
+    async def fetch(session, url):
+        async with session.get(url, headers=headers) as response:
+            return await response.text()
 
-async def main():
-    async with aiohttp.ClientSession() as session:
-        ts = await fetch(session, source)
-    tsal = ts.replace(videoid+'_','https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
-    if "internal" in tsal:
-        tsal = tsal.replace('internal','https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
-    if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
-    tsal = tsal.replace('\n','')
-    tsal = tsal.replace(' ','')
+    async def main():
+        async with aiohttp.ClientSession() as session:
+            ts = await fetch(session, source)
+            tsal = ts.replace(videoid+'_','https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+            if "internal" in tsal:
+                tsal = tsal.replace('internal','https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+            if "segment" in tsal:
+                tsal = tsal.replace('\n'+'media','\n'+'https://volestream.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
+            tsal = tsal.replace('\n','')
+            tsal = tsal.replace(' ','')
+        return tsal
+
+    tsal = asyncio.run(main())
     return tsal
 
-tsal = asyncio.run(main())
 
 
 @app.route('/getm3u8',methods=['GET'])
