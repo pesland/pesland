@@ -27,9 +27,8 @@ def index(m3u8):
         'sec-fetch-site': 'cross-site',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
-   ts = requests.get(source.format(videoid=videoid), headers=headers)
-tsal = ts.text.replace(videoid+'_', f'https://cdn.ahgecelersensizeceler.workers.dev/getstream?param=getts&source={source.format(videoid=videoid)}_')
-
+    ts = requests.get(source, headers=headers)
+    tsal = ts.text.replace(videoid+'_', f'https://cdn.ahgecelersensizeceler.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'internal' in tsal:
         tsal = tsal.replace('internal', f'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
     if 'segment' in tsal:
