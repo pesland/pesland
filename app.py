@@ -32,7 +32,7 @@ def index(m3u8):
     if 'internal' in tsal:
         tsal = tsal.replace('internal', f'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
     if 'segment' in tsal:
-        tsal = tsal.replace('\nmedia', f'\nhttps://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+        tsal = tsal.replace('\nmedia', f'\nhttps://cdn.ahgecelersensizeceler.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
     return tsal
 
 @app.route('/getm3u8', methods=['GET'])
