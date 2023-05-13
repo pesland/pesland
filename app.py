@@ -102,8 +102,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://volestreamredirect1.ahgecelersensizeceler.workers.dev/https://erdoganladevam.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://volestreamredirect1.ahgecelersensizeceler.workers.dev/https://erdoganladevam.herokuapp.com/"+veri+'&videoid='+videoid
+                '''return "https://erdoganladevam.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://erdoganladevam.herokuapp.com/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
  
