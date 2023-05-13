@@ -9,7 +9,7 @@ CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('https://erdoganladevam.herokuapp.com/', '')
+    source = m3u8.replace('https://cdn.ahgecelersensizeceler.workers.dev/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get('videoid')
@@ -64,7 +64,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://cdn.ahgecelersensizeceler.workers.dev/getstream?param=getts&source=','')
+        source = source.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
