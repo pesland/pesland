@@ -31,10 +31,10 @@ def index(m3u8):
 tsal = ts.text.replace(videoid+'_', 'https://edge10.xmediaget.com/hls-live/{}/{}/{}.ts'.format(videoid, 1, videoid))
     if 'internal' in tsal:
 tsal = ts.text.replace(videoid+'_', '***')
-tsal = tsal.replace('internal', f'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
+tsal = ts.text.replace(videoid+'_', 'https://edge10.xmediaget.com/hls-live/{}/{}/{}.ts'.format(videoid, 1, videoid))
 tsal = tsal.replace('***', f'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'segment' in tsal:
-tsal = tsal.replace('\nmedia', f'\n{"#"*10} gizli link {"#"*10}\nhttps://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+tsal = ts.text.replace(videoid+'_', 'https://edge10.xmediaget.com/hls-live/{}/{}/{}.ts'.format(videoid, 1, videoid))
     return tsal
  
 @app.route('/getm3u8', methods=['GET'])
