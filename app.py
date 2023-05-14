@@ -27,13 +27,30 @@ def index(m3u8):
         'sec-fetch-site': 'cross-site',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
+  try:
     ts = requests.get(source, headers=headers)
+    ts.raise_for_status() # HTTP hatalarını kontrol et
     tsal = ts.text.replace(videoid+'_', f'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'internal' in tsal:
         tsal = tsal.replace('internal', f'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
     if 'segment' in tsal:
         tsal = tsal.replace('\nmedia', f'\nhttps://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+    if tsal.strip() == '': # Boş bir yanıt aldıysanız
+        raise ValueError('Yanıt boş')
     return tsal
+except requests.exceptions.HTTPError as e:
+    print(f"HTTP hatası oluştu: {e}")
+    # Hata mesajını işleyin veya uygun şekilde işlem yapın
+except requests.exceptions.ConnectionError as e:
+    print(f"Bağlantı hatası oluştu: {e}")
+    # Hata mesajını işleyin veya uygun şekilde işlem yapın
+except ValueError as e:
+    print(f"Yanıt boş: {e}")
+    # Hata mesajını işleyin veya uygun şekilde işlem yapın
+except Exception as e:
+    print(f"Hata oluştu: {e}")
+    # Hata mesajını işleyin veya uygun şekilde işlem yapın
+
  
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
