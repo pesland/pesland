@@ -28,11 +28,11 @@ def index(m3u8):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     ts = requests.get(source, headers=headers)
-    tsal = ts.text.replace(videoid+'_', f'https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
+    tsal = ts.text.replace(videoid+'_', f'https://abinolurcalis.kkjfjfjsfjsfjsjfj.workers.dev/https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'internal' in tsal:
-        tsal = tsal.replace('internal', f'https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
+        tsal = tsal.replace('internal', f'https://abinolurcalis.kkjfjfjsfjsfjsjfj.workers.dev/https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
     if 'segment' in tsal:
-        tsal = tsal.replace('\nmedia', f'\nhttps://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+        tsal = tsal.replace('\nmedia', f'\nhttps://abinolurcalis.kkjfjfjsfjsfjsjfj.workers.dev/https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
     return tsal
  
 @app.route('/getm3u8', methods=['GET'])
@@ -102,8 +102,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/"+veri+'&videoid='+videoid
+                '''return "https://whale-app-25ay3.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://whale-app-25ay3.ondigitalocean.app/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
  
