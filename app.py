@@ -30,11 +30,11 @@ def process_queue():
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
         }
         ts = requests.get(source, headers=headers)
-        tsal = ts.text.replace(videoid+'_', f'https://cors-proxy.fringe.zone/https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
+        tsal = ts.text.replace(videoid+'_', f'https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
         if 'internal' in tsal:
-            tsal = tsal.replace('internal', f'https://cors-proxy.fringe.zone/https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
+            tsal = tsal.replace('internal', f'https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
         if 'segment' in tsal:
-            tsal = tsal.replace('\nmedia', f'\nhttps://cors-proxy.fringe.zone/https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+            tsal = tsal.replace('\nmedia', f'\nhttps://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
         return tsal
 
 @app.route('/<m3u8>')
