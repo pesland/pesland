@@ -9,7 +9,7 @@ CORS(app)
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('http://test.yuustream.net/', '')
+    source = m3u8.replace('https://pepsiknkkn.herokuapp.com/http://test.yuustream.net/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get('videoid')
