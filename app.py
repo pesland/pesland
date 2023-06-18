@@ -56,7 +56,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://whale-app-25ay3.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
  
 @app.route('/getstream',methods=['GET'])
@@ -102,8 +102,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://late-breeze-c588.kkjfjfjsfjsfjsjfj.workers.dev/"+veri+'&videoid='+videoid
+                '''return "https://whale-app-25ay3.ondigitalocean.app/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://whale-app-25ay3.ondigitalocean.app/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
  
