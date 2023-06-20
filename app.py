@@ -28,11 +28,11 @@ def index(m3u8):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     ts = requests.get(source, headers=headers)
-    tsal = ts.text.replace(videoid+'_', f'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
+    tsal = ts.text.replace(videoid+'_', f'https://cors-proxy.fringe.zone/https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'internal' in tsal:
-        tsal = tsal.replace('internal', f'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
+        tsal = tsal.replace('internal', f'https://cors-proxy.fringe.zone/https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
     if 'segment' in tsal:
-        tsal = tsal.replace('\nmedia', f'\nhttps://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
+        tsal = tsal.replace('\nmedia', f'\nhttps://cors-proxy.fringe.zone/https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
     return tsal
  
 @app.route('/getm3u8', methods=['GET'])
