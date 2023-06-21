@@ -1,5 +1,4 @@
 import requests
-import time
 from flask import Flask, request
 from flask_cors import CORS
 import re
@@ -48,7 +47,6 @@ def getm3u8():
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     now = datetime.datetime.now()
-    zaman = time.time();
     headers = {
         'accept': '*/*',
         'accept-encoding': 'gzip, deflate, br',
@@ -101,6 +99,8 @@ def getstream():
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
         r = requests.post("https://1xlite-2023337.top/cinema",json=veriler)
+        print(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
@@ -115,6 +115,7 @@ def getstream():
             veri = veri.replace('edge7', 'edge10')
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
+            
             if "m3u8" in veri:
                 '''return "https://erdoganladevam.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
                 return "https://erdoganladevam.herokuapp.com/"+veri+'&videoid='+videoid
