@@ -99,7 +99,7 @@ def getstream():
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
         r = requests.post("https://1xlite-2023337.top/cinema",json=veriler)
-        print(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+        print(str(datetime.datetime.now()) +" - " + "1xlite" + " istek cevap suresi: " + str(datetime.datetime.now() - now));
 
         if "FullscreenAllowed" in r.text:
             veri = r.text
