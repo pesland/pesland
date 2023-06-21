@@ -3,6 +3,7 @@ from flask import Flask, request
 from flask_cors import CORS
 import re
 import datetime;
+import os;
 
 app = Flask(__name__)
 CORS(app)
@@ -94,6 +95,8 @@ def getstream():
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
         r = requests.post("https://1xlite-2023337.top/cinema",json=veriler)
+        print(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+        now = datetime.datetime.now();
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
