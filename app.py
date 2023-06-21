@@ -33,7 +33,7 @@ def index(m3u8):
     ts = requests.get(source, headers=headers)
     with open(os.getcwd()+"/log.txt", "a") as f:
 
-        f.write(str(datetime.datetime.now()) +" - " source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+        f.write(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
 
     tsal = ts.text.replace(videoid+'_', f'https://cors-proxy.fringe.zone/https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'internal' in tsal:
@@ -65,7 +65,7 @@ def getm3u8():
     ts = requests.get(source, headers=headers)
     with open(os.getcwd()+"/log.txt", "a") as f:
 
-        f.write(str(datetime.datetime.now()) +" - " source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+        f.write(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
     tsal = ts.text
     tsal = tsal.replace(videoid+'_','https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
@@ -96,7 +96,7 @@ def getstream():
         ts = requests.get(source,headers=headers)
         with open(os.getcwd()+"/log.txt", "a") as f:
 
-            f.write(str(datetime.datetime.now()) +" - " source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+            f.write(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
         return ts.content
     if param == "getm3u8":
         videoid = request.args.get("videoid")
