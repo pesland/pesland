@@ -2,6 +2,7 @@ import requests
 from flask import Flask, request
 from flask_cors import CORS
 import re
+import os;
 import datetime;
 
 app = Flask(__name__)
@@ -30,7 +31,7 @@ def index(m3u8):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     ts = requests.get(source, headers=headers)
-    with open("log.txt, "a") as f:
+    with open(os.getcwd()+"/log.txt", "a") as f:
 
         f.write(str(datetime.datetime.now()) +" - " source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
 
@@ -62,7 +63,7 @@ def getm3u8():
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     ts = requests.get(source, headers=headers)
-    with open("log.txt, "a") as f:
+    with open(os.getcwd()+"/log.txt, "a") as f:
 
         f.write(str(datetime.datetime.now()) +" - " source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
     tsal = ts.text
@@ -93,7 +94,7 @@ def getstream():
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
         }
         ts = requests.get(source,headers=headers)
-        with open("log.txt, "a") as f:
+        with open(os.getcwd()+"/log.txt, "a") as f:
 
             f.write(str(datetime.datetime.now()) +" - " source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
         return ts.content
