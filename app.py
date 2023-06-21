@@ -73,7 +73,7 @@ def getm3u8():
 @app.route('/getstream',methods=['GET'])
 def getstream():
     param = request.args.get("param")
-    now = datetime.datetime();
+    now = datetime.datetime().now();
     if param == "getts":
         source = request.url
         source = source.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=','')
