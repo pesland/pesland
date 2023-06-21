@@ -2,19 +2,20 @@ import requests
 from flask import Flask, request
 from flask_cors import CORS
 import re
-import datetime;
 import os;
+import datetime;
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/<m3u8>')
 def index(m3u8):
+    now = datetime.datetime.now();
+    d
     m3u8 = request.url.replace('__', '/')
     source = m3u8.replace('https://erdoganladevam.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
-    now = datetime.datetime.now();
     videoid = request.args.get('videoid')
     headers = {
         'accept': '*/*',
@@ -32,6 +33,7 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     print(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
+
     tsal = ts.text.replace(videoid+'_', f'https://cors-proxy.fringe.zone/https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     if 'internal' in tsal:
         tsal = tsal.replace('internal', f'https://cors-proxy.fringe.zone/https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
@@ -44,7 +46,8 @@ def getm3u8():
     source = request.args.get('source')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
-    now = datetime.datetime.now();
+    now = datetime.datetime.now()
+    zaman = time.time();
     headers = {
         'accept': '*/*',
         'accept-encoding': 'gzip, deflate, br',
@@ -60,6 +63,8 @@ def getm3u8():
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     ts = requests.get(source, headers=headers)
+
+
     print(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
     tsal = ts.text
     tsal = tsal.replace(videoid+'_','https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
@@ -95,8 +100,6 @@ def getstream():
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
         r = requests.post("https://1xlite-2023337.top/cinema",json=veriler)
-        print(str(datetime.datetime.now()) +" - " + source + " istek cevap suresi: " + str(datetime.datetime.now() - now));
-        now = datetime.datetime.now();
         if "FullscreenAllowed" in r.text:
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
@@ -117,5 +120,5 @@ def getstream():
         else:
             return "Veri yok"
 
-if __name__ == '__main__':
+if _name_ == '__main__':
     app.run()
