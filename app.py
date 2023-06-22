@@ -30,11 +30,11 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://pepsiknkkn.herokuapp.com/https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://pepsiknkkn.herokuapp.com/https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://pepsiknkkn.herokuapp.com/https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://pepsiknkkn.herokuapp.com/https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://pepsiknkkn.herokuapp.com/https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://pepsiknkkn.herokuapp.com/https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -105,8 +105,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://erdoganladevam.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://erdoganladevam.herokuapp.com/"+veri+'&videoid='+videoid
+                '''return "https://neset-baba-sigara.keremihsanozer.workers.dev/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://neset-baba-sigara.keremihsanozer.workers.dev/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
 
