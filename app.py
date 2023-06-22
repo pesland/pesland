@@ -28,19 +28,15 @@ def index(m3u8):
         'sec-fetch-site': 'cross-site',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
-   proxies = {
-    'http': None,
-    'https': None
-}
-
-ts = requests.get(source, headers=headers, proxies=proxies)
+ts = requests.get('https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid, headers=headers)
 tsal = ts.text
-tsal = tsal.replace(videoid+'_','https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+tsal = tsal.replace(videoid + '_', 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 if "internal" in tsal:
-    tsal = tsal.replace('internal','https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+    tsal = tsal.replace('internal', 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 if "segment" in tsal:
-    tsal = tsal.replace('\n'+'media','\n'+'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
+    tsal = tsal.replace('\n' + 'media', '\n' + 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 return tsal
+
 
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
