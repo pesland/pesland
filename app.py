@@ -1,4 +1,4 @@
- import requests
+import requests
 from flask import Flask
 from flask import request
 from flask_cors import CORS
@@ -28,7 +28,7 @@ def index(m3u8):
         'sec-fetch-site': 'cross-site',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
-ts = requests.get(source, headers=headers)
+    ts = requests.get(source, headers=headers)
     tsal = ts.text
     tsal = tsal.replace(videoid+'_','https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
@@ -36,7 +36,6 @@ ts = requests.get(source, headers=headers)
     if "segment" in tsal:
         tsal = tsal.replace('\n'+'media','\n'+'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
-
 
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
