@@ -9,7 +9,7 @@ CORS(app)
 def index(m3u8):
     m3u8 = request.url.replace('__','/')
     source = m3u8
-    source = source.replace('https://deneme.maltinok.com/', '')
+    source = source.replace('https://erdoganladevam.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -40,7 +40,7 @@ def index(m3u8):
 @app.route('/getm3u8',methods=['GET'])
 def getm3u8():
     source = request.url
-    source = source.replace('https://deneme.maltinok.com/getm3u8?source=', '')
+    source = source.replace('https://erdoganladevam.herokuapp.com/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     headers = {
@@ -59,7 +59,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://deneme.maltinok.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
 
 @app.route('/getstream',methods=['GET'])
@@ -67,7 +67,7 @@ def getstream():
     param = request.args.get("param")
     if param == "getts":
         source = request.url
-        source = source.replace('https://deneme.maltinok.com/getstream?param=getts&source=','')
+        source = source.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=','')
         source = source.replace('%2F','/')
         source = source.replace('%3F','?')
         headers = {
@@ -105,8 +105,8 @@ def getstream():
             veri = veri.replace(':43434','')
             veri = veri.replace('edge100','edge10')
             if "m3u8" in veri:
-                '''return "https://deneme.maltinok.com/getm3u8?source="+veri+'&videoid='+videoid'''
-                return "https://deneme.maltinok.com/"+veri+'&videoid='+videoid
+                '''return "https://erdoganladevam.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
+                return "https://erdoganladevam.herokuapp.com/"+veri+'&videoid='+videoid
         else:
             return "Veri yok"
 
