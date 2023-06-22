@@ -30,11 +30,11 @@ def index(m3u8):
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://cors-proxy.fringe.zone/https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://cors-proxy.fringe.zone/https://edge1.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     if "internal" in tsal:
-        tsal = tsal.replace('internal','https://cors-proxy.fringe.zone/https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+        tsal = tsal.replace('internal','https://cors-proxy.fringe.zone/https://edge1.xmediaget.com/hls-live/'+videoid+'/1/internal')
     if "segment" in tsal:
-        tsal = tsal.replace('\n'+'media','\n'+'https://cors-proxy.fringe.zone/https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
+        tsal = tsal.replace('\n'+'media','\n'+'https://cors-proxy.fringe.zone/https://edge1.xmediaget.com/hls-live/'+videoid+'/1/media')
     return tsal
 
 @app.route('/getm3u8',methods=['GET'])
@@ -59,7 +59,7 @@ def getm3u8():
     }
     ts = requests.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid+'_','https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+    tsal = tsal.replace(videoid+'_','https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge1.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
     return tsal
 
 @app.route('/getstream',methods=['GET'])
@@ -94,16 +94,16 @@ def getstream():
             veri = r.text
             veri = re.findall('"URL":"(.*?)"',veri)
             veri = veri[0].replace("\/", "__")
-            veri = veri.replace('edge3','edge10')
-            veri = veri.replace('edge100','edge10')
-            veri = veri.replace('edge4','edge10')
-            veri = veri.replace('edge2','edge10')
-            veri = veri.replace('edge5','edge10')
-            veri = veri.replace('edge1','edge10')
-            veri = veri.replace('edge6', 'edge10')
-            veri = veri.replace('edge7', 'edge10')
+            veri = veri.replace('edge3','edge1')
+            veri = veri.replace('edge100','edge1')
+            veri = veri.replace('edge4','edge1')
+            veri = veri.replace('edge2','edge1')
+            veri = veri.replace('edge5','edge1')
+            veri = veri.replace('edge10','edge1')
+            veri = veri.replace('edge6', 'edge1')
+            veri = veri.replace('edge7', 'edge1')
             veri = veri.replace(':43434','')
-            veri = veri.replace('edge100','edge10')
+            veri = veri.replace('edge100','edge1')
             if "m3u8" in veri:
                 '''return "https://erdoganladevam.herokuapp.com/getm3u8?source="+veri+'&videoid='+videoid'''
                 return "https://erdoganladevam.herokuapp.com/"+veri+'&videoid='+videoid
