@@ -9,7 +9,11 @@ CORS(app)
 
 async def fetch_data(session, url, headers):
     async with session.get(url, headers=headers) as response:
-        return await response.text()
+        if response.status == 200:
+            return await response.read()
+        else:
+            return None
+
 
 @app.route('/<m3u8>')
 async def index(m3u8):
@@ -74,7 +78,7 @@ async def getm3u8():
 @app.route('/getstream', methods=['GET'])
 async def getstream():
     param = request.args.get("param")
-    
+
     if param == "getts":
         source = request.url.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=', '')
         source = source.replace('%2F', '/')
@@ -93,37 +97,16 @@ async def getstream():
             'sec-fetch-site': 'cross-site',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
         }
-        
-        async with ClientSession() as session:
+
+        async with aiohttp.ClientSession() as session:
             ts = await fetch_data(session, source, headers)
-            return ts.encode()
-
-    if param == "getm3u8":
-        videoid = request.args.get("videoid")
-        veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
-
-        async with ClientSession() as session:
-            async with session.post("https://1xlite-8725298.top/cinema", json=veriler) as response:
-                r = await response.text()
-
-                if "FullscreenAllowed" in r:
-                    veri = re.findall('"URL":"(.*?)"', r)
-                    veri = veri[0].replace("\/", "__")
-                    veri = veri.replace('edge3', 'edge10')
-                    veri = veri.replace('edge100', 'edge10')
-                    veri = veri.replace('edge4', 'edge10')
-                    veri = veri.replace('edge2', 'edge10')
-                    veri = veri.replace('edge5', 'edge10')
-                    veri = veri.replace('edge1', 'edge10')
-                    veri = veri.replace('edge6', 'edge10')
-                    veri = veri.replace('edge7', 'edge10')
-                    veri = veri.replace(':43434', '')
-                    veri = veri.replace('edge100', 'edge10')
-
-                    if "m3u8" in veri:
-                        return "https://erdoganladevam.herokuapp.com/" + veri + '&videoid=' + videoid
-                else:
-                    return "Veri yok"
+            if ts is not None:
+                return ts
+            else:
+                return "Veri çekilemedi."
+    elif param == "getm3u8":
+        
+        pass
 
 if __name__ == '__main__':
     app.run()
