@@ -1,5 +1,5 @@
-import asyncio
 import re
+import aiohttp
 from aiohttp import ClientSession
 from flask import Flask, request
 from flask_cors import CORS
@@ -48,9 +48,10 @@ async def index(m3u8):
         
         return tsal
 
+
 @app.route('/getm3u8', methods=['GET'])
 async def getm3u8():
-    source = request.url.replace('https://erdoganladevam.herokuapp.com/getm3u8?source=', '')
+    source = request.args.get("source")
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     headers = {
@@ -75,12 +76,13 @@ async def getm3u8():
         
         return tsal
 
+
 @app.route('/getstream', methods=['GET'])
 async def getstream():
     param = request.args.get("param")
 
     if param == "getts":
-        source = request.url.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=', '')
+        source = request.args.get("source")
         source = source.replace('%2F', '/')
         source = source.replace('%3F', '?')
         headers = {
@@ -105,8 +107,9 @@ async def getstream():
             else:
                 return "Veri çekilemedi."
     elif param == "getm3u8":
-        
+        # Buraya getm3u8 için yapılacak işlemleri ekleyebilirsiniz
         pass
+
 
 if __name__ == '__main__':
     app.run()
