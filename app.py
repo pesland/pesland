@@ -1,9 +1,8 @@
 import asyncio
-import requests
+import re
 from aiohttp import ClientSession
 from flask import Flask, request
 from flask_cors import CORS
-import re
 
 app = Flask(__name__)
 CORS(app)
@@ -14,17 +13,15 @@ async def fetch_data(session, url, headers):
 
 @app.route('/<m3u8>')
 async def index(m3u8):
-    m3u8 = request.url.replace('__','/')
-    source = m3u8
-    source = source.replace('https://erdoganladevam.herokuapp.com/', '')
+    m3u8 = request.url.replace('__', '/')
+    source = m3u8.replace('https://erdoganladevam.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
-    
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
-        "accept-language": "tr-TR, tr;q = 0.9",
+        "accept-language": "tr-TR, tr;q=0.9",
         "origin": "https://www.maltinok.com",
         "referer": "https://www.maltinok.com/",
         'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
@@ -38,26 +35,24 @@ async def index(m3u8):
     
     async with ClientSession() as session:
         ts = await fetch_data(session, source, headers)
-        tsal = ts.replace(videoid+'_', 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
+        tsal = ts.replace(videoid + '_', 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
         if "internal" in tsal:
-            tsal = tsal.replace('internal','https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/internal')
+            tsal = tsal.replace('internal', 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
         if "segment" in tsal:
-            tsal = tsal.replace('\n'+'media','\n'+'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/media')
-
+            tsal = tsal.replace('\n' + 'media', '\n' + 'https://neset-baba-sigara.keremihsanozer.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+        
         return tsal
 
-@app.route('/getm3u8',methods=['GET'])
+@app.route('/getm3u8', methods=['GET'])
 async def getm3u8():
-    source = request.url
-    source = source.replace('https://erdoganladevam.herokuapp.com/getm3u8?source=', '')
+    source = request.url.replace('https://erdoganladevam.herokuapp.com/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
-    
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
-        "accept-language": "tr-TR, tr;q = 0.9",
+        "accept-language": "tr-TR, tr;q=0.9",
         "origin": "https://www.maltinok.com",
         "referer": "https://www.maltinok.com/",
         'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
@@ -71,20 +66,19 @@ async def getm3u8():
     
     async with ClientSession() as session:
         ts = await fetch_data(session, source, headers)
-        tsal = ts.replace(videoid+'_', 'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/'+videoid+'/1/'+videoid+'_')
-
+        videoid = request.args.get("videoid")
+        tsal = ts.replace(videoid + '_', 'https://erdoganladevam.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+        
         return tsal
 
-@app.route('/getstream',methods=['GET'])
+@app.route('/getstream', methods=['GET'])
 async def getstream():
     param = request.args.get("param")
     
     if param == "getts":
-        source = request.url
-        source = source.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=','')
-        source = source.replace('%2F','/')
-        source = source.replace('%3F','?')
-        
+        source = request.url.replace('https://erdoganladevam.herokuapp.com/getstream?param=getts&source=', '')
+        source = source.replace('%2F', '/')
+        source = source.replace('%3F', '?')
         headers = {
             'accept': '*/*',
             'accept-encoding': 'gzip, deflate, br',
@@ -102,33 +96,34 @@ async def getstream():
         
         async with ClientSession() as session:
             ts = await fetch_data(session, source, headers)
-            return ts.content
-        
+            return ts.encode()
+
     if param == "getm3u8":
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
-        
-        async with ClientSession() as session:
-            r = await session.post("https://1xlite-8725298.top/cinema", json=veriler)
-            if "FullscreenAllowed" in await r.text():
-                veri = await r.text()
-                veri = re.findall('"URL":"(.*?)"', veri)
-                veri = veri[0].replace("\/", "__")
-                veri = veri.replace('edge3', 'edge10')
-                veri = veri.replace('edge100', 'edge10')
-                veri = veri.replace('edge4', 'edge10')
-                veri = veri.replace('edge2', 'edge10')
-                veri = veri.replace('edge5', 'edge10')
-                veri = veri.replace('edge1', 'edge10')
-                veri = veri.replace('edge6', 'edge10')
-                veri = veri.replace('edge7', 'edge10')
-                veri = veri.replace(':43434', '')
-                veri = veri.replace('edge100', 'edge10')
 
-                if "m3u8" in veri:
-                    return "https://erdoganladevam.herokuapp.com/" + veri + '&videoid=' + videoid
-            else:
-                return "Veri yok"
+        async with ClientSession() as session:
+            async with session.post("https://1xlite-8725298.top/cinema", json=veriler) as response:
+                r = await response.text()
+
+                if "FullscreenAllowed" in r:
+                    veri = re.findall('"URL":"(.*?)"', r)
+                    veri = veri[0].replace("\/", "__")
+                    veri = veri.replace('edge3', 'edge10')
+                    veri = veri.replace('edge100', 'edge10')
+                    veri = veri.replace('edge4', 'edge10')
+                    veri = veri.replace('edge2', 'edge10')
+                    veri = veri.replace('edge5', 'edge10')
+                    veri = veri.replace('edge1', 'edge10')
+                    veri = veri.replace('edge6', 'edge10')
+                    veri = veri.replace('edge7', 'edge10')
+                    veri = veri.replace(':43434', '')
+                    veri = veri.replace('edge100', 'edge10')
+
+                    if "m3u8" in veri:
+                        return "https://erdoganladevam.herokuapp.com/" + veri + '&videoid=' + videoid
+                else:
+                    return "Veri yok"
 
 if __name__ == '__main__':
     app.run()
