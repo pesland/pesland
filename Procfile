@@ -1,1 +1,1 @@
-web: gunicorn app:app --timeout 60 --worker-class gevent --workers 1 --threads 4
+web: gunicorn app:app --timeout 30 --worker-class gevent --workers 2 --threads 4
