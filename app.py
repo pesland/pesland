@@ -5,7 +5,6 @@ import re
 
 app = Flask(__name__)
 CORS(app)
-
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
