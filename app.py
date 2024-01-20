@@ -104,7 +104,7 @@ def getstream():
             veri = veri.replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "https://seashell-app-cdk6o.ondigitalocean.app/https://edge10.xmediaget.com/" + veri + '&videoid=' + videoid
+                return "" + veri + '&videoid=' + videoid
         else:
             return "Veri yok"
 
