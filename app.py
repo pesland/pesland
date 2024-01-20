@@ -104,7 +104,7 @@ def getstream():
             veri = veri.replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "" + veri + '&videoid=' + videoid
+                return "https://turbo-turabi.volestream--geldi-kizlarr.workers.dev/" + veri + '&videoid=' + videoid
         else:
             return "Veri yok"
 
