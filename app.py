@@ -15,7 +15,7 @@ def generate_ts_content(source_url, headers):
 @app.route('/<m3u8>')
 def index(m3u8):
     source = request.url.replace('__', '/')
-    source = source.replace('https://seashell-app-cdk6o.ondigitalocean.app/', '')
+    source = source.replace('https://seashell-app-cdk6o.ondigitalocean.app/https://edge10.xmediaget.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
