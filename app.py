@@ -15,7 +15,7 @@ def generate_ts_content(source_url, headers):
 @app.route('/<m3u8>')
 def index(m3u8):
     source = request.url.replace('__', '/')
-    source = source.replace('https://seashell-app-cdk6o.ondigitalocean.app/https://edge10.xmediaget.com/', '')
+    source = source.replace('https://seashell-app-cdk6o.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -104,7 +104,7 @@ def getstream():
             veri = veri.replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "https://seashell-app-cdk6o.ondigitalocean.app/" + veri + '&videoid=' + videoid
+                return "https://seashell-app-cdk6o.ondigitalocean.app/https://edge10.xmediaget.com/" + veri + '&videoid=' + videoid
         else:
             return "Veri yok"
 
