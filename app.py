@@ -12,7 +12,7 @@ session = requests.Session()
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('https://urchin-app-6rp53.ondigitalocean.app/', '')
+    source = m3u8.replace('https://coral-app-mnmfr.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -35,21 +35,21 @@ def index(m3u8):
     ts = session.get(source, headers=headers)
     tsal = ts.text
 
-    tsal = tsal.replace(videoid + '_', 'https://urchin-app-6rp53.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://coral-app-mnmfr.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://urchin-app-6rp53.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', 'https://coral-app-mnmfr.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 
     if "segment" in tsal:
         tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://urchin-app-6rp53.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+                            '\n' + 'https://coral-app-mnmfr.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
 
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
-    source = request.url.replace('https://urchin-app-6rp53.ondigitalocean.app/getm3u8?source=', '')
+    source = request.url.replace('https://coral-app-mnmfr.ondigitalocean.app/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     
@@ -71,7 +71,7 @@ def getm3u8():
     ts = session.get(source, headers=headers)
     tsal = ts.text
     videoid = request.args.get("videoid")
-    tsal = tsal.replace(videoid + '_', 'https://urchin-app-6rp53.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://coral-app-mnmfr.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
     
     return tsal
 
@@ -81,7 +81,7 @@ def getstream():
     param = request.args.get("param")
 
     if param == "getts":
-        source = request.url.replace('https://urchin-app-6rp53.ondigitalocean.app/getstream?param=getts&source=', '')
+        source = request.url.replace('https://coral-app-mnmfr.ondigitalocean.app/getstream?param=getts&source=', '')
         source = source.replace('%2F', '/')
         source = source.replace('%3F', '?')
         
@@ -116,7 +116,7 @@ def getstream():
                 'edge7', 'edge10').replace(':43434', '').replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "https://urchin-app-6rp53.ondigitalocean.app/" + veri + '&videoid=' + videoid
+                return "https://coral-app-mnmfr.ondigitalocean.app/" + veri + '&videoid=' + videoid
 
         else:
             return "Veri yok"
