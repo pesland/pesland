@@ -35,14 +35,14 @@ def index(m3u8):
     ts = session.get(source, headers=headers)
     tsal = ts.text
 
-    tsal = tsal.replace(videoid + '_', 'https://chunk.esraeroltopukluayak.workers.dev/proxy/https://server1x.volestream-ts.site/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://king-prawn-app-4rbek.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://chunk.esraeroltopukluayak.workers.dev/proxy/https://server1x.volestream-ts.site/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', 'https://king-prawn-app-4rbek.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 
     if "segment" in tsal:
         tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://chunk.esraeroltopukluayak.workers.dev/proxy/https://server1x.volestream-ts.site/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+                            '\n' + 'https://king-prawn-app-4rbek.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
