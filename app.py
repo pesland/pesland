@@ -20,7 +20,7 @@ def index(m3u8):
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
-        "accept-language": "tr-TR, tr;q = 0.9",
+        "accept-language": "tr-TR, tr;q=0.9",
         "origin": "https://www.maltinok.com",
         "referer": "https://www.maltinok.com/",
         'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
@@ -56,7 +56,7 @@ def getm3u8():
     headers = {
         "accept": "*/*",
         "accept-encoding": "gzip, deflate, br",
-        "accept-language": "tr-TR, tr;q = 0.9",
+        "accept-language": "tr-TR, tr;q=0.9",
         "origin": "https://www.maltinok.com",
         "referer": "https://www.maltinok.com/",
         'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
@@ -88,7 +88,7 @@ def getstream():
         headers = {
             "accept": "*/*",
             "accept-encoding": "gzip, deflate, br",
-            "accept-language": "tr-TR, tr;q = 0.9",
+            "accept-language": "tr-TR, tr;q=0.9",
             "origin": "https://www.maltinok.com",
             "referer": "https://www.maltinok.com/",
             'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
@@ -101,7 +101,8 @@ def getstream():
         }
         
         ts = session.get(source, headers=headers)
-        return Response(ts.iter_content(chunk_size=128), content_type=ts.headers['content-type'])
+        # Return with Content-Type set to image/jpg
+        return Response(ts.iter_content(chunk_size=128), content_type='image/jpg')
     
     if param == "getm3u8":
         videoid = request.args.get("videoid")
