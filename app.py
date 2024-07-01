@@ -35,14 +35,15 @@ def index(m3u8):
     ts = session.get(source, headers=headers)
     tsal = ts.text
 
+    # Replace URLs to use .avif instead of .ts
     tsal = tsal.replace(videoid + '_', 'https://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace('.ts', '.avif')  # Change .ts to .avif
 
     if "internal" in tsal:
         tsal = tsal.replace('internal', 'https://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
-
-    if "segment" in tsal:
-        tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+    
+    tsal = tsal.replace('\nmedia',
+                        '\nhttps://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
@@ -72,6 +73,7 @@ def getm3u8():
     tsal = ts.text
     videoid = request.args.get("videoid")
     tsal = tsal.replace(videoid + '_', 'https://lobster-app-bwfjt.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace('.ts', '.avif')  # Change .ts to .avif
     
     return tsal
 
@@ -101,8 +103,12 @@ def getstream():
         }
         
         ts = session.get(source, headers=headers)
-        # Return with Content-Type set to image/jpg
-        return Response(ts.iter_content(chunk_size=128), content_type='image/jpg')
+        
+        # Replace .ts with .avif in the content
+        content = ts.content.replace(b'.ts', b'.avif')
+        
+        # Return with Content-Type set to image/avif
+        return Response(content, content_type='image/avif')
     
     if param == "getm3u8":
         videoid = request.args.get("videoid")
