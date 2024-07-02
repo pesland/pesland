@@ -38,14 +38,14 @@ def index(m3u8):
     
     ts = session.get(source, headers=headers)
     tsal = ts.text
-    tsal = tsal.replace(videoid + '_', 'https://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 
     if "segment" in tsal:
         tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://1xb.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+                            '\n' + 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
