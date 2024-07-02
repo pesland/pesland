@@ -107,7 +107,7 @@ def getstream():
     if param == "getm3u8":
         videoid = request.args.get("videoid")
         veriler = {"AppId": "3", "AppVer": "1025", "VpcVer": "1.0.11", "Language": "tr", "Token": "", "VideoId": videoid}
-        r = session.post("https://melbet-813981.top/cinema", json=veriler)
+        r = session.post("https://bizbet064384.top/cinema", json=veriler)
 
         if "FullscreenAllowed" in r.text:
             veri = re.findall('"URL":"(.*?)"', r.text)[0].replace("\/", "__")
