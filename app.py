@@ -1,16 +1,16 @@
+import requests
 from flask import Flask, request, Response
 from flask_cors import CORS
+from flask_caching import Cache
 import re
-import requests
-import requests_cache
 
 app = Flask(__name__)
 CORS(app)
 
-# Enable requests-cache
-requests_cache.install_cache('my_cache', backend='sqlite', expire_after=300)
+# Flask-Caching konfigürasyonu
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-# Use a global session for making HTTP requests
+# HTTP istekleri için global oturum
 session = requests.Session()
 
 @app.route('/<m3u8>')
