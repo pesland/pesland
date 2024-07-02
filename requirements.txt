@@ -2,7 +2,8 @@ Flask
 gunicorn
 gevent
 requests
-requests-cache
+flask_caching
+cache
 regex
 flask_cors
 asyncio
