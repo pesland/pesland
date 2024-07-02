@@ -1,16 +1,12 @@
 import requests
 from flask import Flask, request, Response
 from flask_cors import CORS
-from flask_caching import Cache
 import re
 
 app = Flask(__name__)
 CORS(app)
 
-# Flask-Caching konfigürasyonu
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
-
-# HTTP istekleri için global oturum
+# Use a global session for making HTTP requests
 session = requests.Session()
 
 @app.route('/<m3u8>')
@@ -38,6 +34,7 @@ def index(m3u8):
     
     ts = session.get(source, headers=headers)
     tsal = ts.text
+
     tsal = tsal.replace(videoid + '_', 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
