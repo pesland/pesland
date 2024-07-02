@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, request, Response
 from flask_cors import CORS
+from cachetools import TTLCache
 import re
 
 app = Flask(__name__)
@@ -8,6 +9,9 @@ CORS(app)
 
 # Use a global session for making HTTP requests
 session = requests.Session()
+
+# Initialize cache with a TTL of 300 seconds and a maximum size of 1000 items
+ts_cache = TTLCache(maxsize=1000, ttl=300)
 
 @app.route('/<m3u8>')
 def index(m3u8):
@@ -32,8 +36,12 @@ def index(m3u8):
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     
-    ts = session.get(source, headers=headers)
-    tsal = ts.text
+    if source in ts_cache:
+        tsal = ts_cache[source]
+    else:
+        ts = session.get(source, headers=headers)
+        tsal = ts.text
+        ts_cache[source] = tsal
 
     tsal = tsal.replace(videoid + '_', 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
@@ -68,8 +76,13 @@ def getm3u8():
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
     }
     
-    ts = session.get(source, headers=headers)
-    tsal = ts.text
+    if source in ts_cache:
+        tsal = ts_cache[source]
+    else:
+        ts = session.get(source, headers=headers)
+        tsal = ts.text
+        ts_cache[source] = tsal
+
     videoid = request.args.get("videoid")
     tsal = tsal.replace(videoid + '_', 'https://lobster-app-bwfjt.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
     
@@ -100,8 +113,12 @@ def getstream():
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
         }
         
-        ts = session.get(source, headers=headers)
-        # Return with Content-Type set to image/jpg
+        if source in ts_cache:
+            ts = ts_cache[source]
+        else:
+            ts = session.get(source, headers=headers)
+            ts_cache[source] = ts
+
         return Response(ts.iter_content(chunk_size=128), content_type='image/jpg')
     
     if param == "getm3u8":
