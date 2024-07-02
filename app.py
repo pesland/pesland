@@ -37,20 +37,21 @@ def index(m3u8):
     }
     
     if source in ts_cache:
+        app.logger.info(f"Cache hit for {source}")
         tsal = ts_cache[source]
     else:
+        app.logger.info(f"Cache miss for {source}")
         ts = session.get(source, headers=headers)
         tsal = ts.text
         ts_cache[source] = tsal
 
-    tsal = tsal.replace(videoid + '_', 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', f'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', f'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/internal')
 
     if "segment" in tsal:
-        tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+        tsal = tsal.replace('\n' + 'media', f'\nhttps://lucky-hill-cb73.sezonbittioff.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/media')
 
     return tsal
 
@@ -77,14 +78,16 @@ def getm3u8():
     }
     
     if source in ts_cache:
+        app.logger.info(f"Cache hit for {source}")
         tsal = ts_cache[source]
     else:
+        app.logger.info(f"Cache miss for {source}")
         ts = session.get(source, headers=headers)
         tsal = ts.text
         ts_cache[source] = tsal
 
     videoid = request.args.get("videoid")
-    tsal = tsal.replace(videoid + '_', 'https://lobster-app-bwfjt.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', f'https://lobster-app-bwfjt.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/{videoid}/1/{videoid}_')
     
     return tsal
 
@@ -114,8 +117,10 @@ def getstream():
         }
         
         if source in ts_cache:
+            app.logger.info(f"Cache hit for {source}")
             ts = ts_cache[source]
         else:
+            app.logger.info(f"Cache miss for {source}")
             ts = session.get(source, headers=headers)
             ts_cache[source] = ts
 
@@ -141,4 +146,4 @@ def getstream():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
