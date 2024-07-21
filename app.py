@@ -2,6 +2,7 @@ import requests
 from flask import Flask, request, Response
 from flask_cors import CORS
 import re
+import subprocess
 
 app = Flask(__name__)
 CORS(app)
@@ -44,7 +45,13 @@ def index(m3u8):
         tsal = tsal.replace('\n' + 'media',
                             '\n' + 'https://volestreamhd.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
-    return tsal
+    # Assuming you want to convert tsal to webp here
+    # You can use subprocess or any other method to perform the conversion
+    # Example using subprocess to convert to webp (you might need to adjust this)
+    process = subprocess.Popen(['ffmpeg', '-i', '-', '-frames:v', '1', '-vsync', '0', '-f', 'webp', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    out, _ = process.communicate(input=tsal.encode('utf-8'))
+
+    return Response(out, content_type='image/webp')
 
 
 @app.route('/getm3u8', methods=['GET'])
