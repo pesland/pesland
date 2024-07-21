@@ -12,7 +12,7 @@ session = requests.Session()
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('https://lobster-app-bwfjt.ondigitalocean.app/', '')
+    source = m3u8.replace('https://volestreamhd.global.ssl.fastly.net/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -34,9 +34,6 @@ def index(m3u8):
     
     ts = session.get(source, headers=headers)
     tsal = ts.text
-
-    # Replace .ts with .webp
-    tsal = tsal.replace('.ts', '.webp')
 
     tsal = tsal.replace(videoid + '_', 'https://volestreamhd.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
@@ -52,7 +49,7 @@ def index(m3u8):
 
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
-    source = request.url.replace('https://lobster-app-bwfjt.ondigitalocean.app/getm3u8?source=', '')
+    source = request.url.replace('https://volestreamhd.global.ssl.fastly.net/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     
@@ -74,7 +71,7 @@ def getm3u8():
     ts = session.get(source, headers=headers)
     tsal = ts.text
     videoid = request.args.get("videoid")
-    tsal = tsal.replace(videoid + '_', 'https://lobster-app-bwfjt.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://volestreamhd.global.ssl.fastly.net/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
     
     return tsal
 
@@ -84,7 +81,7 @@ def getstream():
     param = request.args.get("param")
 
     if param == "getts":
-        source = request.url.replace('https://lobster-app-bwfjt.ondigitalocean.app/getstream?param=getts&source=', '')
+        source = request.url.replace('https://volestreamhd.global.ssl.fastly.net/getstream?param=getts&source=', '')
         source = source.replace('%2F', '/')
         source = source.replace('%3F', '?')
         
@@ -105,7 +102,7 @@ def getstream():
         
         ts = session.get(source, headers=headers)
         # Return with Content-Type set to image/jpg
-        return Response(ts.iter_content(chunk_size=128), content_type='image/jpg')
+        return Response(ts.iter_content(chunk_size=128), content_type='image/webp')
     
     if param == "getm3u8":
         videoid = request.args.get("videoid")
@@ -120,7 +117,7 @@ def getstream():
                 'edge7', 'edge10').replace(':43434', '').replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "https://lobster-app-bwfjt.ondigitalocean.app/" + veri + '&videoid=' + videoid
+                return "https://volestreamhd.global.ssl.fastly.net/" + veri + '&videoid=' + videoid
 
         else:
             return "Veri yok"
