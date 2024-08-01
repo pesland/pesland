@@ -12,7 +12,7 @@ session = requests.Session()
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('https://testts-0bd2e58edb6c.herokuapp.com/', '')
+    source = m3u8.replace('https://testts-4b2c183a4ece.herokuapp.com/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
@@ -35,21 +35,21 @@ def index(m3u8):
     ts = session.get(source, headers=headers)
     tsal = ts.text
 
-    tsal = tsal.replace(videoid + '_', 'https://testts-0bd2e58edb6c.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://testts-4b2c183a4ece.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://testts-0bd2e58edb6c.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', 'https://testts-4b2c183a4ece.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 
     if "segment" in tsal:
         tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://testts-0bd2e58edb6c.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+                            '\n' + 'https://testts-4b2c183a4ece.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
 
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
-    source = request.url.replace('https://testts-0bd2e58edb6c.herokuapp.com/getm3u8?source=', '')
+    source = request.url.replace('https://testts-4b2c183a4ece.herokuapp.com/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     
@@ -71,7 +71,7 @@ def getm3u8():
     ts = session.get(source, headers=headers)
     tsal = ts.text
     videoid = request.args.get("videoid")
-    tsal = tsal.replace(videoid + '_', 'https://testts-0bd2e58edb6c.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://testts-4b2c183a4ece.herokuapp.com/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
     
     return tsal
 
@@ -81,7 +81,7 @@ def getstream():
     param = request.args.get("param")
 
     if param == "getts":
-        source = request.url.replace('https://testts-0bd2e58edb6c.herokuapp.com/getstream?param=getts&source=', '')
+        source = request.url.replace('https://testts-4b2c183a4ece.herokuapp.com/getstream?param=getts&source=', '')
         source = source.replace('%2F', '/')
         source = source.replace('%3F', '?')
         
@@ -117,7 +117,7 @@ def getstream():
                 'edge7', 'edge10').replace(':43434', '').replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "https://testts-0bd2e58edb6c.herokuapp.com/" + veri + '&videoid=' + videoid
+                return "https://testts-4b2c183a4ece.herokuapp.com/" + veri + '&videoid=' + videoid
 
         else:
             return "Veri yok"
