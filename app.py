@@ -35,21 +35,21 @@ def index(m3u8):
     ts = session.get(source, headers=headers)
     tsal = ts.text
 
-    tsal = tsal.replace(videoid + '_', 'https://seashell-app-ogm3g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://seashell-app-ogm3g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 
     if "segment" in tsal:
         tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://seashell-app-ogm3g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+                            '\n' + 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
 
 @app.route('/getm3u8', methods=['GET'])
 def getm3u8():
-    source = request.url.replace('https://seashell-app-ogm3g.ondigitalocean.app/getm3u8?source=', '')
+    source = request.url.replace('https://goldfish-app-g3uaf.ondigitalocean.app/getm3u8?source=', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     
@@ -71,7 +71,7 @@ def getm3u8():
     ts = session.get(source, headers=headers)
     tsal = ts.text
     videoid = request.args.get("videoid")
-    tsal = tsal.replace(videoid + '_', 'https://seashell-app-ogm3g.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
     
     return tsal
 
@@ -81,7 +81,7 @@ def getstream():
     param = request.args.get("param")
 
     if param == "getts":
-        source = request.url.replace('https://seashell-app-ogm3g.ondigitalocean.app/getstream?param=getts&source=', '')
+        source = request.url.replace('https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=', '')
         source = source.replace('%2F', '/')
         source = source.replace('%3F', '?')
         
@@ -117,7 +117,7 @@ def getstream():
                 'edge7', 'edge10').replace(':43434', '').replace('edge100', 'edge10')
 
             if "m3u8" in veri:
-                return "https://seashell-app-ogm3g.ondigitalocean.app/" + veri + '&videoid=' + videoid
+                return "https://goldfish-app-g3uaf.ondigitalocean.app/" + veri + '&videoid=' + videoid
 
         else:
             return "Veri yok"
