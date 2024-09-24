@@ -12,7 +12,7 @@ session = requests.Session()
 @app.route('/<m3u8>')
 def index(m3u8):
     m3u8 = request.url.replace('__', '/')
-    source = m3u8.replace('https://seashell-app-ogm3g.ondigitalocean.app/', '')
+    source = m3u8.replace('https://goldfish-app-g3uaf.ondigitalocean.app/', '')
     source = source.replace('%2F', '/')
     source = source.replace('%3F', '?')
     videoid = request.args.get("videoid")
