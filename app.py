@@ -35,14 +35,14 @@ def index(m3u8):
     ts = session.get(source, headers=headers)
     tsal = ts.text
 
-    tsal = tsal.replace(videoid + '_', 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
+    tsal = tsal.replace(videoid + '_', 'https://twilight-wave-3d9e.yedekbirkankam.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/' + videoid + '_')
 
     if "internal" in tsal:
-        tsal = tsal.replace('internal', 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
+        tsal = tsal.replace('internal', 'https://twilight-wave-3d9e.yedekbirkankam.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/internal')
 
     if "segment" in tsal:
         tsal = tsal.replace('\n' + 'media',
-                            '\n' + 'https://goldfish-app-g3uaf.ondigitalocean.app/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
+                            '\n' + 'https://twilight-wave-3d9e.yedekbirkankam.workers.dev/getstream?param=getts&source=https://edge10.xmediaget.com/hls-live/' + videoid + '/1/media')
 
     return tsal
 
